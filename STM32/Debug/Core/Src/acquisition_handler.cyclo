@@ -1,0 +1,4 @@
+../Core/Src/acquisition_handler.c:8:7:ConvertOutputVoltage	1
+../Core/Src/acquisition_handler.c:12:7:ConvertOutputCurrent	1
+../Core/Src/acquisition_handler.c:16:6:setScalleVoltage	5
+../Core/Src/acquisition_handler.c:37:6:setScalleCurrent	3

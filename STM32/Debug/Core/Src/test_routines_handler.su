@@ -1,0 +1,5 @@
+../Core/Src/test_routines_handler.c:11:6:ImpedanceSpectroscopy	152	dynamic
+../Core/Src/test_routines_handler.c:52:6:CiclicVoltametry	16464	static
+../Core/Src/test_routines_handler.c:90:6:ConstantCurrent_ChargeDischarge	208	static
+../Core/Src/test_routines_handler.c:133:6:ConstantCurrent_Charge_AutoDischarge	208	static
+../Core/Src/test_routines_handler.c:180:6:ConstantCurrent_Charge_AutoDischarge1	208	static

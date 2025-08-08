@@ -1,0 +1,6 @@
+../Core/Src/dac_handler.c:6:6:DAC_Start_DMA	32	static
+../Core/Src/dac_handler.c:16:6:DAC_Stop_DMA	16	static
+../Core/Src/dac_handler.c:22:6:DAC_Frequency_Control	32	static
+../Core/Src/dac_handler.c:41:6:HAL_DAC_ConvCpltCallbackCh1	16	static
+../Core/Src/dac_handler.c:48:10:Get_Periods	4	static
+../Core/Src/dac_handler.c:51:6:Reset_Periods	4	static

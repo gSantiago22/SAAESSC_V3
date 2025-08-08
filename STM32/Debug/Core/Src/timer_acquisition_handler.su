@@ -1,0 +1,5 @@
+../Core/Src/timer_acquisition_handler.c:9:6:Stopwatch_Init	8	static
+../Core/Src/timer_acquisition_handler.c:13:6:TIM2_Callback	4	static
+../Core/Src/timer_acquisition_handler.c:17:10:Get_Current_Time	16	static
+../Core/Src/timer_acquisition_handler.c:21:6:Stopwatch_Reset	4	static
+../Core/Src/timer_acquisition_handler.c:25:10:Measure_Duration	24	static

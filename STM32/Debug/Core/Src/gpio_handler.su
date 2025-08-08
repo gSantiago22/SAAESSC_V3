@@ -1,0 +1,4 @@
+../Core/Src/gpio_handler.c:4:6:EnableOutput	16	static
+../Core/Src/gpio_handler.c:14:6:SourceOperation	16	static
+../Core/Src/gpio_handler.c:21:6:ScaleControlOutput	16	static
+../Core/Src/gpio_handler.c:44:6:ScaleControlinput	16	static

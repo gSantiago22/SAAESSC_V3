@@ -1,0 +1,10 @@
+../Core/Src/adc_handler.c:23:6:ADS8661_Select	3
+../Core/Src/adc_handler.c:31:6:ADS8661_Deselect	3
+../Core/Src/adc_handler.c:39:10:ADS8661_Read	2
+../Core/Src/adc_handler.c:56:7:getVoltage	1
+../Core/Src/adc_handler.c:60:7:getCurrent	1
+../Core/Src/adc_handler.c:64:6:ADS8661_WriteRegister	1
+../Core/Src/adc_handler.c:83:6:ADC_Start	1
+../Core/Src/adc_handler.c:108:6:HAL_ADC_ConvCpltCallback	2
+../Core/Src/adc_handler.c:116:6:TIM3_Callback	1
+../Core/Src/adc_handler.c:135:6:Control_AcquisitionRate	1

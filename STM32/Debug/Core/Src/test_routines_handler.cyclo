@@ -1,0 +1,5 @@
+../Core/Src/test_routines_handler.c:11:6:ImpedanceSpectroscopy	4
+../Core/Src/test_routines_handler.c:52:6:CiclicVoltametry	3
+../Core/Src/test_routines_handler.c:90:6:ConstantCurrent_ChargeDischarge	7
+../Core/Src/test_routines_handler.c:133:6:ConstantCurrent_Charge_AutoDischarge	7
+../Core/Src/test_routines_handler.c:180:6:ConstantCurrent_Charge_AutoDischarge1	6

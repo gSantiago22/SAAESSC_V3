@@ -1,0 +1,5 @@
+../Core/Src/signal_generator_handler.c:9:6:SetScale	16	static
+../Core/Src/signal_generator_handler.c:30:6:GenerateWaveform	40	static
+../Core/Src/signal_generator_handler.c:69:6:StopGenerateWaveform	8	static
+../Core/Src/signal_generator_handler.c:74:6:GenerateVector	64	static
+../Core/Src/signal_generator_handler.c:147:6:DigitalControl	16	static
