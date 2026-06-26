@@ -1,8 +1,8 @@
 # SAAESSC V3
-**Automatic Data Acquisition System for Supercapacitor Characterization**
+**Portable System for Automatic Acquisition of Electrical Signals for Supercapacitors**
 
 ## 📌 Overview
-The SAAESSC (*Sistema Automático de Aquisição de Dados para Caracterização de Supercapacitores*) is an embedded instrumentation project designed for the automated testing, data acquisition, and characterization of energy storage devices, specifically supercapacitors. 
+The SAAESSC (*Portable System for Automatic Acquisition of Electrical Signals for Supercapacitors*) is an embedded instrumentation project designed for the automated testing, data acquisition, and characterization of energy storage devices, specifically supercapacitors. 
 
 Version 3 brings a refined, integrated architecture utilizing an STM32 microcontroller and wireless data transmission via Bluetooth, allowing for isolated and precise measurements without tethering to a PC.
 
