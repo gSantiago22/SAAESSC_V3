@@ -1,0 +1,17 @@
+# Arquivos do Sistema Operacional
+Thumbs.db
+.DS_Store
+
+# Compilação de Documentos
+*.aux
+*.log
+*.out
+*.gz
+*.toc
+*.fls
+*.fdb_latexmk
+
+# Arquivos Temporários de Código
+__pycache__/
+*.pyc
+*.asv
