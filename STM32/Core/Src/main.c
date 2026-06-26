@@ -33,21 +33,6 @@
 #define PI 3.14159265358979323846
 /* USER CODE END Includes */
 
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
@@ -67,10 +52,6 @@ TIM_HandleTypeDef htim6;
 TIM_HandleTypeDef htim7;
 DMA_HandleTypeDef hdma_tim2_up;
 
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -84,20 +65,15 @@ static void MX_TIM7_Init(void);
 static void MX_SPI3_Init(void);
 static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
-#define I2C_BUFFER_SIZE 16  // Tamanho do buffer de transmissão/recepção
+#define I2C_BUFFER_SIZE 16  // Buffer size for rx/tx
 #define DEVICE_ADDRESS 0x42
-char tx_buffer[100]; // Dados a enviar
+char tx_buffer[100]; // Tx data
 uint8_t rx_buffer[I2C_BUFFER_SIZE];
-#define DAC_BUFFER_SIZE 32 // Tamanho da tabela da senoide
+#define DAC_BUFFER_SIZE 32 // sine size
 #define DAC_MAX_VALUE 4095
 uint16_t dacbuffer1[DAC_BUFFER_SIZE];
 uint16_t dacbuffer2[DAC_BUFFER_SIZE];
 uint32_t test = 0;
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-/* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
@@ -106,23 +82,13 @@ uint32_t test = 0;
 int main(void)
 {
 
-  /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
-
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
-  /* USER CODE END Init */
-
   /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-  /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
@@ -135,32 +101,25 @@ int main(void)
   MX_TIM7_Init();
   MX_SPI3_Init();
   MX_TIM3_Init();
-  /* USER CODE BEGIN 2 */
-
 
   //HAL_TIM_Base_Start_IT(&htim7);
   ADC_Start();
-  Control_AcquisitionRate(50);
-  ScaleControlinput(3, 0);
+  Control_AcquisitionRate(50);  // Set acquisition rate to 50 Hz
+  ScaleControlinput(3, 0);      // Set scale for current and voltage
   //SourceOperation(VOLTAGE);
 
-  //EnableOutput(true);
+  //EnableOutput(true);       // Uncomment to enable output for testing generic waveform generation
 
-  //GenerateWaveform(SINE_WAVE, 0.1, 0, 1, 32,dacbuffer1 ,dacbuffer2); // 10 mVpp, offset 0
+  //GenerateWaveform(SINE_WAVE, 0.1, 0, 1, 32,dacbuffer1 ,dacbuffer2); // 10 mVpp, offset 0 - generic sine wave generation for testing
 
 
-  CiclicVoltametry(5, 2.5, 15, 3);
-  //CiclicVoltametry(2, 1, 10, 1);
-  //CiclicVoltametry(2, 1, 5, 1);
+  //CiclicVoltametry(5, 2.5, 15, 3);      // Uncomment to use Cyclic Voltammetry (CV) - (SC Voltage, Offset, Scan Rate (mV/s), Number of Cycles)
 
-  //ConstantCurrent_ChargeDischarge(0.203, 4615, 2.5, 0, 30);
-  //ConstantCurrent_Charge_AutoDischarge(0.203, 4615, 2.5, 2000);
-  //ConstantCurrent_Charge_AutoDischarge1(125, 1, 2.7, 2000);
+  //ConstantCurrent_ChargeDischarge(0.203, 4615, 2.5, 0, 30);     // Uncomment to use Constant Current Charge Discharge (CCCD) - (Current (mA), Shunt (ohm), SC Voltage, Offset, Number of Cycles)
 
-  /* USER CODE END 2 */
+  //ConstantCurrent_Charge_SelfDischarge(0.203, 4615, 2.5, 2000);   // Uncomment to use Constant Current Charge Self Discharge (CCCSD) - (Current (mA), Shunt (ohm), SC Voltage, Discharge Time (s))
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+
   while (1)
   {
 	  //ImpedanceSpectroscopy(10, 22000, 10);
@@ -257,15 +216,7 @@ void SystemClock_Config(void)
   */
 static void MX_ADC1_Init(void)
 {
-
-  /* USER CODE BEGIN ADC1_Init 0 */
-
-  /* USER CODE END ADC1_Init 0 */
-
   ADC_ChannelConfTypeDef sConfig = {0};
-
-  /* USER CODE BEGIN ADC1_Init 1 */
-  /* USER CODE END ADC1_Init 1 */
 
   /** Common config
   */
@@ -308,23 +259,17 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN ADC1_Init 2 */
-
-  // Configuração do canal de DMA para o ADC
-      hdma_adc1.Instance = DMA1_Channel1;
-      hdma_adc1.Init.Direction = DMA_PERIPH_TO_MEMORY;
-      hdma_adc1.Init.PeriphInc = DMA_PINC_DISABLE;
-      hdma_adc1.Init.MemInc = DMA_MINC_ENABLE;
-      hdma_adc1.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
-      hdma_adc1.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
-      hdma_adc1.Init.Mode = DMA_CIRCULAR;
-      hdma_adc1.Init.Priority = DMA_PRIORITY_HIGH;
-      HAL_DMA_Init(&hdma_adc1);
-
-      __HAL_LINKDMA(&hadc1, DMA_Handle, hdma_adc1);
-
-  /* USER CODE END ADC1_Init 2 */
-
+  // Channel configuration for DMA
+  hdma_adc1.Instance = DMA1_Channel1;
+    hdma_adc1.Init.Direction = DMA_PERIPH_TO_MEMORY;
+    hdma_adc1.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_adc1.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_adc1.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
+    hdma_adc1.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+    hdma_adc1.Init.Mode = DMA_CIRCULAR;
+    hdma_adc1.Init.Priority = DMA_PRIORITY_HIGH;
+    HAL_DMA_Init(&hdma_adc1);
+  __HAL_LINKDMA(&hadc1, DMA_Handle, hdma_adc1);
 }
 
 /**
@@ -334,16 +279,7 @@ static void MX_ADC1_Init(void)
   */
 static void MX_DAC_Init(void)
 {
-
-  /* USER CODE BEGIN DAC_Init 0 */
-
-  /* USER CODE END DAC_Init 0 */
-
   DAC_ChannelConfTypeDef sConfig = {0};
-
-  /* USER CODE BEGIN DAC_Init 1 */
-
-  /* USER CODE END DAC_Init 1 */
 
   /** DAC Initialization
   */
@@ -369,8 +305,6 @@ static void MX_DAC_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN DAC_Init 2 */
-
   hdma_dac_ch1.Instance = DMA2_Channel3;
       hdma_dac_ch1.Init.Direction = DMA_MEMORY_TO_PERIPH;
       hdma_dac_ch1.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -383,8 +317,6 @@ static void MX_DAC_Init(void)
           Error_Handler();
       }
   __HAL_LINKDMA(&hdac, DMA_Handle1, hdma_dac_ch1);
-  /* USER CODE END DAC_Init 2 */
-
 }
 
 /**
@@ -395,13 +327,6 @@ static void MX_DAC_Init(void)
 static void MX_I2C1_Init(void)
 {
 
-  /* USER CODE BEGIN I2C1_Init 0 */
-
-  /* USER CODE END I2C1_Init 0 */
-
-  /* USER CODE BEGIN I2C1_Init 1 */
-
-  /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
   hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
@@ -415,7 +340,7 @@ static void MX_I2C1_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN I2C1_Init 2 */
+ 
 
   hdma_i2c1_tx.Instance = DMA1_Channel6;
   hdma_i2c1_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
@@ -427,11 +352,8 @@ static void MX_I2C1_Init(void)
   hdma_i2c1_tx.Init.Priority = DMA_PRIORITY_LOW;
   HAL_DMA_Init(&hdma_i2c1_tx);
 
-  // Link entre I2C e DMA
+  // Link between I2C and DMA
   __HAL_LINKDMA(&hi2c1, hdmatx, hdma_i2c1_tx);
-
-  /* USER CODE END I2C1_Init 2 */
-
 }
 
 /**
@@ -441,14 +363,6 @@ static void MX_I2C1_Init(void)
   */
 static void MX_SPI3_Init(void)
 {
-
-  /* USER CODE BEGIN SPI3_Init 0 */
-
-  /* USER CODE END SPI3_Init 0 */
-
-  /* USER CODE BEGIN SPI3_Init 1 */
-
-  /* USER CODE END SPI3_Init 1 */
   /* SPI3 parameter configuration*/
   hspi3.Instance = SPI3;
   hspi3.Init.Mode = SPI_MODE_MASTER;
@@ -466,10 +380,6 @@ static void MX_SPI3_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN SPI3_Init 2 */
-
-  /* USER CODE END SPI3_Init 2 */
-
 }
 
 /**
@@ -479,17 +389,9 @@ static void MX_SPI3_Init(void)
   */
 static void MX_TIM2_Init(void)
 {
-
-  /* USER CODE BEGIN TIM2_Init 0 */
-
-  /* USER CODE END TIM2_Init 0 */
-
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
 
-  /* USER CODE BEGIN TIM2_Init 1 */
-
-  /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 72-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
@@ -511,10 +413,6 @@ static void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN TIM2_Init 2 */
-
-  /* USER CODE END TIM2_Init 2 */
-
 }
 
 /**
@@ -525,16 +423,9 @@ static void MX_TIM2_Init(void)
 static void MX_TIM3_Init(void)
 {
 
-  /* USER CODE BEGIN TIM3_Init 0 */
-
-  /* USER CODE END TIM3_Init 0 */
-
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
 
-  /* USER CODE BEGIN TIM3_Init 1 */
-
-  /* USER CODE END TIM3_Init 1 */
   htim3.Instance = TIM3;
   htim3.Init.Prescaler = 720-1;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
@@ -556,10 +447,6 @@ static void MX_TIM3_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN TIM3_Init 2 */
-
-  /* USER CODE END TIM3_Init 2 */
-
 }
 
 /**
@@ -569,16 +456,8 @@ static void MX_TIM3_Init(void)
   */
 static void MX_TIM6_Init(void)
 {
-
-  /* USER CODE BEGIN TIM6_Init 0 */
-
-  /* USER CODE END TIM6_Init 0 */
-
   TIM_MasterConfigTypeDef sMasterConfig = {0};
 
-  /* USER CODE BEGIN TIM6_Init 1 */
-
-  /* USER CODE END TIM6_Init 1 */
   htim6.Instance = TIM6;
   htim6.Init.Prescaler = 72-1;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
@@ -594,10 +473,6 @@ static void MX_TIM6_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN TIM6_Init 2 */
-
-  /* USER CODE END TIM6_Init 2 */
-
 }
 
 /**
@@ -607,16 +482,8 @@ static void MX_TIM6_Init(void)
   */
 static void MX_TIM7_Init(void)
 {
-
-  /* USER CODE BEGIN TIM7_Init 0 */
-
-  /* USER CODE END TIM7_Init 0 */
-
   TIM_MasterConfigTypeDef sMasterConfig = {0};
 
-  /* USER CODE BEGIN TIM7_Init 1 */
-
-  /* USER CODE END TIM7_Init 1 */
   htim7.Instance = TIM7;
   htim7.Init.Prescaler = 7200-1;
   htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
@@ -632,10 +499,6 @@ static void MX_TIM7_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN TIM7_Init 2 */
-
-  /* USER CODE END TIM7_Init 2 */
-
 }
 
 /**
@@ -675,8 +538,6 @@ static void MX_DMA_Init(void)
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOD_CLK_ENABLE();

@@ -14,7 +14,6 @@ void ImpedanceSpectroscopy(float min_frequency, float max_frequency, int num_fre
 void Test (WaveformType waveform, uint16_t vpp, uint16_t offset, float frequency, uint16_t SMP, uint16_t* dacBuffer);
 void CiclicVoltametry(float vpp, float offset, float ScanRate_mVs, uint32_t cycles);
 void ConstantCurrent_ChargeDischarge(float current_mA, float res, float maxvoltage_V, float minvoltage_V, uint32_t cycles);
-void ConstantCurrent_Charge_AutoDischarge(float current_mA, float res, float maxvoltage_V, float dischargetime_s);
-void ConstantCurrent_Charge_AutoDischarge1(float current_mA, float res, float maxvoltage_V, float dischargetime_s);
+void ConstantCurrent_Charge_SelfDischarge(float current_mA, float res, float maxvoltage_V, float dischargetime_s);
 
 #endif

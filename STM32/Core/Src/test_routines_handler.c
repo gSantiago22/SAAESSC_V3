@@ -130,7 +130,7 @@ void ConstantCurrent_ChargeDischarge(float current_mA, float res, float maxvolta
 
 	EnableOutput(false);
 }
-void ConstantCurrent_Charge_AutoDischarge(float current_mA, float res, float maxvoltage_V, float dischargetime_s){
+void ConstantCurrent_Charge_SelfDischarge(float current_mA, float res, float maxvoltage_V, float dischargetime_s){
 	uint16_t current[32];
 		uint16_t offset[32];
 		uint32_t time;
@@ -177,44 +177,3 @@ void ConstantCurrent_Charge_AutoDischarge(float current_mA, float res, float max
     	//StopGenerateWaveform();
 }
 
-void ConstantCurrent_Charge_AutoDischarge1(float current_mA, float res, float maxvoltage_V, float dischargetime_s){
-	uint16_t current[32];
-		uint16_t offset[32];
-		uint32_t time;
-
-		float Vc = 2*current_mA*(res+0.235)/1000;
-		float Vsc, Csc;
-		float discharge_time_init;
-		GenerateWaveform(CONST_VALUE, Vc, 0.0062, 0, 32, current, offset);
-
-		bool charge = true;
-
-		SourceOperation(CURRENT);
-		EnableOutput(true);
-
-		while(1){
-			Vsc = getVoltage();
-			Csc = getCurrent();
-			time = Get_Current_Time();
-			if (charge && Vsc >= maxvoltage_V) {
-				discharge_time_init = time;
-				GenerateWaveform(CONST_VALUE, 0, 0.0062, 0, 32, current, offset);
-				charge = false;
-			}
-			if (!charge) {
-				if (time - discharge_time_init >= (dischargetime_s*1000)){
-					break;
-				}
-			}
-			snprintf(tx_buffer, sizeof(tx_buffer), "%.3f %.3f %lu", Csc, Vsc, time);
-			// Iniciar envio por I2C com DMA
-			//HAL_I2C_Master_Transmit_DMA(&hi2c1, DEVICE_ADDRESS << 1, (uint8_t*)tx_buffer, strlen(tx_buffer));
-			if (HAL_I2C_Master_Transmit(&hi2c1, DEVICE_ADDRESS << 1, (uint8_t *)tx_buffer, strlen(tx_buffer), HAL_MAX_DELAY) != HAL_OK) {
-						Error_Handler();  // Trate erros na transmissão I2C
-			}
-			HAL_Delay(10);
-		}
-
-		EnableOutput(false);
-    	//StopGenerateWaveform();
-}
