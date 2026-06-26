@@ -12,7 +12,7 @@ Version 3 brings a refined, integrated architecture utilizing an STM32 microcont
 * `/DataAcquisition/`: Python scripts for serial data logging, interpolation, and hysteresis area calculations.
 
 ## 🔌 Hardware & PCB Design
-The hardware architecture of SAAESSC V3 is modular and optimized for precise instrumentation. To minimize noise and improve signal integrity, the PCB design is divided into specific functional blocks:
+The hardware architecture of $\text{SAAES}^{\text{SC}}_{\text{V3}}$ is modular and optimized for precise instrumentation. To minimize noise and improve signal integrity, the PCB design is divided into specific functional blocks:
 * **Signal Generation Board (`SignalGen`):** Responsible for generating the controlled stimulus (e.g., precise charge/discharge cycles and specific analog waveforms) applied to the supercapacitor under test.
 * **Data Acquisition Board (`Acquisition`):** Handles the high-resolution conditioning and reading of voltage and current responses, interfacing directly with the STM32's ADCs.
 
