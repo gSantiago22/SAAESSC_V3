@@ -7,9 +7,9 @@ The SAAESSC (*Sistema Automático de Aquisição de Dados para Caracterização 
 Version 3 brings a refined, integrated architecture utilizing an STM32 microcontroller and wireless data transmission via Bluetooth, allowing for isolated and precise measurements without tethering to a PC.
 
 ## 📂 Repository Structure
-* `/STM32_Code/`: Contains the firmware source code, HAL configurations, and project files for the STM32 microcontroller.
+* `/STM32/`: Contains the firmware source code, HAL configurations, and project files for the STM32 microcontroller.
 * `/PCB/`: Contains the schematics, layouts, and manufacturing files (Gerbers, component IDs, and PDFs) for the hardware design.
-* `/Scripts/`: Python/MATLAB scripts for serial data logging, interpolation, and hysteresis area calculations.
+* `/DataAcquisition/`: Python scripts for serial data logging, interpolation, and hysteresis area calculations.
 
 ## 🔌 Hardware & PCB Design
 The hardware architecture of SAAESSC V3 is modular and optimized for precise instrumentation. To minimize noise and improve signal integrity, the PCB design is divided into specific functional blocks:
