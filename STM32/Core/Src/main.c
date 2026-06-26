@@ -118,49 +118,6 @@ int main(void)
   //ConstantCurrent_ChargeDischarge(0.203, 4615, 2.5, 0, 30);     // Uncomment to use Constant Current Charge Discharge (CCCD) - (Current (mA), Shunt (ohm), SC Voltage, Offset, Number of Cycles)
 
   //ConstantCurrent_Charge_SelfDischarge(0.203, 4615, 2.5, 2000);   // Uncomment to use Constant Current Charge Self Discharge (CCCSD) - (Current (mA), Shunt (ohm), SC Voltage, Discharge Time (s))
-
-
-  while (1)
-  {
-	  //ImpedanceSpectroscopy(10, 22000, 10);
-
-
-	  //HAL_Delay(1000);
-
-	  //DAC_Frequency_Control(DAC_CHANNEL_1, 100,32);
-
-	  //HAL_Delay(5000);
-
-	  //DAC_Frequency_Control(DAC_CHANNEL_1, 10000,32);
-
-	  //float Vsc, Csc;
-	  //uint32_t time;
-	  //	  	  Vsc = getVoltage();
-	  //        Csc = getCurrent();
-	  //        time = Get_Current_Time();
-
-	  //        snprintf(tx_buffer, sizeof(tx_buffer), "%.3f %.3f %lu", Csc, Vsc, time);
-	  //        if (HAL_I2C_Master_Transmit(&hi2c1, DEVICE_ADDRESS << 1, (uint8_t *)tx_buffer, strlen(tx_buffer), HAL_MAX_DELAY) != HAL_OK) {
-	  //            Error_Handler();
-	  //        }
-
-	          //HAL_Delay(10); // tempo entre amostras
-	  //if (HAL_I2C_Master_Transmit(&hi2c1, DEVICE_ADDRESS << 1, tx_buffer, I2C_BUFFER_SIZE, HAL_MAX_DELAY) == HAL_OK) {
-	  //            HAL_Delay(100);  // Pequeno atraso antes de leitura
-	  //        }
-	  //
-	  //        // Recebe dados do ESP32
-	  //        if (HAL_I2C_Master_Receive(&hi2c1, DEVICE_ADDRESS << 1, rx_buffer, I2C_BUFFER_SIZE, HAL_MAX_DELAY) == HAL_OK) {
-	  //            // Processar os dados recebidos
-	  //            HAL_Delay(100);
-	  //        }
-
-	  //       HAL_Delay(500);
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
 }
 
 /**

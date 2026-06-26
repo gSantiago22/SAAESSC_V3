@@ -20,34 +20,6 @@ typedef struct {
     uint8_t data_low;   // Dado baixo (contém RANGE_SEL[3:0])
 } ADS8661_WriteCmd;
 
-void ADS8661_Select(int adc) {
-    if (adc==1){
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_11, GPIO_PIN_RESET);
-    } else if (adc==2){
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_10, GPIO_PIN_RESET);
-    }
-}
-
-void ADS8661_Deselect(int adc) {
-    if (adc==1){
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_11, GPIO_PIN_SET);
-    } else if (adc==2){
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_10, GPIO_PIN_SET);
-    }
-}
-
-uint16_t ADS8661_Read(void) {
-    uint8_t dummy[4] = {0x00, 0x00, 0x00, 0x00};
-    uint8_t rx2[4] = {0};
-
-    HAL_StatusTypeDef status2 = HAL_SPI_TransmitReceive(&hspi3, dummy, rx2, 4, HAL_MAX_DELAY);
-    if (status2 != HAL_OK) {
-        return 20;
-    }
-    uint16_t adc_value = (((uint16_t)rx2[0] << 8) | rx2[1]) >> 4;
-    return adc_value;
-}
-
 uint16_t adcBuffer[ADC_BUFFER_SIZE];
 float voltage;
 float current;

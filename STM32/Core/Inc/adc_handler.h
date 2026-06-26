@@ -21,10 +21,6 @@ extern float voltage, current;
  * Esta função é usada para começar o processo de leitura do ADC
  * de forma contínua em modo circular.
  */
-void ADS8661_Select(int adc);
-void ADS8661_Deselect(int adc);
-void ADS8661_WriteRegister(uint8_t reg, uint16_t value);
-uint16_t ADS8661_Read(void);
 float getVoltage();
 float getCurrent();
 void ADC_Start(void);
